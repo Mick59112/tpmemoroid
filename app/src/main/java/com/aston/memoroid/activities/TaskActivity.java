@@ -95,7 +95,7 @@ public class TaskActivity extends AppCompatActivity implements RadioGroup.OnChec
             case 2:
                 return findViewById(R.id.task_priority_2).getId();
             default:
-                 return findViewById(R.id.task_priority_3).getId();
+                return findViewById(R.id.task_priority_3).getId();
         }
     }
 
