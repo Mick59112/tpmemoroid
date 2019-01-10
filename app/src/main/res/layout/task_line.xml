@@ -1,49 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:id="@+id/task_line_background"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
-
+    android:id="@+id/swipe_layout"
+    android:layout_height="match_parent">
+    <!-- Bottom View Start-->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="4dp"
-        android:layout_margin="2dp">
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:background="#66ddff00"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-        <TextView
-            android:id="@+id/task_line_title"
-            android:fontFamily="@font/roboto"
+        <ImageView
+            android:id="@+id/left_image"
             android:layout_width="wrap_content"
-            style="@style/textViewSingleLine"
-            android:textSize="@dimen/task_line_title_size"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/task_line_description"
-            android:layout_width="wrap_content"
-            style="@style/textViewSingleLine"
-            android:textSize="@dimen/task_line_description_size"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/task_line_deadline"
-            android:layout_width="wrap_content"
-            style="@style/textViewSingleLine"
-            android:textSize="@dimen/task_line_deadline_size"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/check"/>
+        <!--What you want to show-->
     </LinearLayout>
+    <!-- Bottom View End-->
 
-    <ImageView
-        android:id="@+id/task_line_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/check"
-        android:tint="@color/green" />
+    <!-- Surface View Start -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:padding="10dp">
+        <!--What you want to show in SurfaceView-->
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/task_line_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/task_line_title"
+                    style="@style/textViewSingleLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/task_line_title_size" />
+
+                <TextView
+                    android:id="@+id/task_line_description"
+                    style="@style/textViewSingleLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/task_line_description_size" />
+
+                <TextView
+                    android:id="@+id/task_line_deadline"
+                    style="@style/textViewSingleLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/task_line_deadline_size" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/task_line_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check"
+                android:tint="@color/green" />
 
 
-</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>

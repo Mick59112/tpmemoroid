@@ -102,6 +102,9 @@ public class TaskActivity extends AppCompatActivity implements RadioGroup.OnChec
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_task, menu);
+        if (currentTask == null) {
+            menu.findItem(R.id.menu_task_delete).setVisible(false);
+        }
         return true;
     }
 
@@ -119,6 +122,7 @@ public class TaskActivity extends AppCompatActivity implements RadioGroup.OnChec
                 } else {
                     currentTask.setTitle(sTitle);
                     currentTask.setPriority(iPriority);
+                    currentTask.setDateModification(System.currentTimeMillis());
                 }
                 currentTask.setDescription(desciption.getText().toString());
                 if (calendarDeadline != null) {

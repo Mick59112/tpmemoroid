@@ -12,6 +12,11 @@ import android.widget.TextView;
 import com.aston.memoroid.R;
 import com.aston.memoroid.managers.TaskManager;
 import com.aston.memoroid.model.Task;
+import com.daimajia.swipe.SwipeLayout;
+
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.util.Date;
 
 public class TaskAdapter extends BaseAdapter {
 
@@ -53,11 +58,12 @@ public class TaskAdapter extends BaseAdapter {
             viewHolder.deadline = convertView.findViewById(R.id.task_line_deadline);
             viewHolder.done = convertView.findViewById(R.id.task_line_done);
             viewHolder.background = convertView.findViewById(R.id.task_line_background);
+            viewHolder.donneAction = convertView.findViewById(R.id.left_image);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Task task = getItem(position);
+        final Task task = getItem(position);
         viewHolder.title.setText(task.getTitle());
         viewHolder.description.setText(task.getDescription());
         viewHolder.done.setVisibility(task.isDone() ? View.VISIBLE : View.GONE);
@@ -72,12 +78,31 @@ public class TaskAdapter extends BaseAdapter {
                 viewHolder.background.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.green));
                 break;
         }
+        if (task.getDeadline() != 0) {
+            PrettyTime p = new PrettyTime();
+            viewHolder.deadline.setText(p.format(new Date(task.getDeadline())));
+        }
+        SwipeLayout swipeLayout = convertView.findViewById(R.id.swipe_layout);
+        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        swipeLayout.addDrag(SwipeLayout.DragEdge.Right, convertView.findViewById(R.id.bottom_wrapper));
+        swipeLayout.addDrag(SwipeLayout.DragEdge.Left,null);
+        viewHolder.donneAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                task.setDone(!task.isDone());
+                notifyDataSetChanged();
+                TaskManager.getInstance().save();
+            }
+        });
+        if (task.isDone()) {
+            viewHolder.background.setBackgroundColor(ContextCompat.getColor(mcontext,R.color.blue));
+        }
         return convertView;
     }
 
     private class ViewHolder {
         TextView title, description, deadline;
-        ImageView done;
+        ImageView done, donneAction;
         View background;
     }
 }

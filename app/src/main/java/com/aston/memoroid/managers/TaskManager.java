@@ -13,6 +13,7 @@ public class TaskManager {
 
     private static TaskManager instance;
     private List<Task> taskList;
+    private boolean showdone = true;
 
     public static TaskManager getInstance() {
         if (instance == null) {
@@ -26,11 +27,25 @@ public class TaskManager {
     }
 
     public int getTaskSize() {
-        return taskList.size();
+        return getFilteredTasks().size();
     }
 
     public Task getTaskForPosition(int position) {
-        return taskList.get(position);
+        return getFilteredTasks().get(position);
+    }
+
+    private List<Task> getFilteredTasks() {
+        List<Task> result = new ArrayList<>();
+        for(Task t : taskList){
+            if(t.isDone()){
+                if(showdone){
+                    result.add(t);
+                }
+            }else{
+                result.add(t);
+            }
+        }
+        return result;
     }
 
     public void saveTask(Task task) {
@@ -69,5 +84,13 @@ public class TaskManager {
         int position = getTaskPositionFromId(id);
         taskList.remove(position);
         save();
+    }
+
+    public boolean isShowdone() {
+        return showdone;
+    }
+
+    public void setShowdone(boolean showdone) {
+        this.showdone = showdone;
     }
 }
