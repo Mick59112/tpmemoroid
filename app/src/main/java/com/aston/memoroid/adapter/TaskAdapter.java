@@ -13,6 +13,7 @@ import com.aston.memoroid.R;
 import com.aston.memoroid.managers.TaskManager;
 import com.aston.memoroid.model.Task;
 import com.daimajia.swipe.SwipeLayout;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -59,6 +60,7 @@ public class TaskAdapter extends BaseAdapter {
             viewHolder.done = convertView.findViewById(R.id.task_line_done);
             viewHolder.background = convertView.findViewById(R.id.task_line_background);
             viewHolder.donneAction = convertView.findViewById(R.id.left_image);
+            viewHolder.image = convertView.findViewById(R.id.task_line_image);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -97,6 +99,7 @@ public class TaskAdapter extends BaseAdapter {
         if (task.isDone()) {
             viewHolder.background.setBackgroundColor(ContextCompat.getColor(mcontext,R.color.blue));
         }
+        viewHolder.image.setImageURI("https://via.placeholder.com/100?text=2" + position);
         return convertView;
     }
 
@@ -104,5 +107,6 @@ public class TaskAdapter extends BaseAdapter {
         TextView title, description, deadline;
         ImageView done, donneAction;
         View background;
+        SimpleDraweeView image;
     }
 }
