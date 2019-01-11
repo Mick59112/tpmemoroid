@@ -7,6 +7,8 @@ import com.orhanobut.hawk.Hawk;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TaskManager {
@@ -45,6 +47,16 @@ public class TaskManager {
                 result.add(t);
             }
         }
+        Collections.sort(result, new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if (o1.getDeadline() != o2.getDeadline()) {
+                    return Long.valueOf(o2.getDeadline() - o1.getDeadline()).intValue();
+                } else {
+                    return o1.getPriority() - o2.getPriority();
+                }
+            }
+        });
         return result;
     }
 
@@ -71,7 +83,7 @@ public class TaskManager {
         return null;
     }
 
-    public int getTaskPositionFromId(String id) {
+    private int getTaskPositionFromId(String id) {
         for (int i = 0; i < taskList.size(); i++) {
             if (StringUtils.equals(taskList.get(i).getId(), id)) {
                 return i;
